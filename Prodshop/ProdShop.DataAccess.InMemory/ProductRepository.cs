@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProdShop.DataAccess.InMemory
 {
-    public class Class1
+    class ProductRepository
     {
     }
 }
