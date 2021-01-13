@@ -7,6 +7,7 @@ using Prodshop.core.Models;
 using ProdShop.DataAccess.InMemory;
 using Prodshop.core.ViewModels;
 using ProdShop.core.Contracts;
+using System.IO;
 
 namespace Prodshop.WebUI.Controllers
 {
@@ -34,7 +35,7 @@ namespace Prodshop.WebUI.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
             {
@@ -42,6 +43,11 @@ namespace Prodshop.WebUI.Controllers
             }
             else
             {
+                if (file != null)
+                {
+                    product.Image = product.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//") + product.Image);
+                }
                 context.Insert(product);
                 context.Commit();
                 return RedirectToAction("Index");
@@ -63,7 +69,7 @@ namespace Prodshop.WebUI.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Edit(Product product, string Id)
+        public ActionResult Edit(Product product, string Id, HttpPostedFileBase file)
         {
             Product productToEdit = context.Find(Id);
             if (productToEdit == null)
@@ -75,6 +81,11 @@ namespace Prodshop.WebUI.Controllers
                 if (!ModelState.IsValid)
                 {
                     return View(product);
+                }
+                if (file != null)
+                {
+                    product.Image = product.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content//ProductImages") + productToEdit.Image);
                 }
                 productToEdit.Category = product.Category;
                 productToEdit.Description = product.Description;
