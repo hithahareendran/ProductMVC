@@ -13,4 +13,15 @@ namespace Prodshop.core.Models
 
        
     }
+    //public class CatDBContext : DbContext
+    //{
+    //    public CatDBContext()
+    //    { }
+    //    public DbSet<Category> Categories { get; set; }
+
+    //}
+
+    //public class DbContext
+    //{
+    //}
 }

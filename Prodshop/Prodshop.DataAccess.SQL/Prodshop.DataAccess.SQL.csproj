@@ -49,11 +49,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext.cs" />
+    <Compile Include="Migrations\202101130809491_Initial.cs" />
+    <Compile Include="Migrations\202101130809491_Initial.Designer.cs">
+      <DependentUpon>202101130809491_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Prodshop.core\Prodshop.core.csproj">
+      <Project>{8fd0baf5-3acf-4833-a22c-e33d0e8db1b4}</Project>
+      <Name>Prodshop.core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202101130809491_Initial.resx">
+      <DependentUpon>202101130809491_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

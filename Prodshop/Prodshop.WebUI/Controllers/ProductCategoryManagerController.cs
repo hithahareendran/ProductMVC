@@ -6,12 +6,14 @@ using System.Web.Mvc;
 using Prodshop.core.Models;
 using ProdShop.core.Contracts;
 using ProdShop.DataAccess.InMemory;
+using System.Data.Entity;
 
 namespace Prodshop.WebUI.Controllers
 {
     public class ProductCategoryManagerController : Controller
     {
         IRepository<ProductCategory> context;
+       // private DefaultConnection Db = new DefaultConnection();
         public ProductCategoryManagerController(IRepository<ProductCategory> context)
         {
             this.context = context;

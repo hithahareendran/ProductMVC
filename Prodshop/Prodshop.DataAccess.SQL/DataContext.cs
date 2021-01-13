@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Prodshop.core.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Prodshop.DataAccess.SQL
 {
