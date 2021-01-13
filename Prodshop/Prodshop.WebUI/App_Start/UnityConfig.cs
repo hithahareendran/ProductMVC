@@ -1,4 +1,5 @@
 using Prodshop.core.Models;
+using Prodshop.DataAccess.SQL;
 using ProdShop.core.Contracts;
 using ProdShop.DataAccess.InMemory;
 using System;
@@ -45,8 +46,8 @@ namespace Prodshop.WebUI
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterType<IRepository<Product>, InMemoryRepository<Product>>();
-            container.RegisterType<IRepository<ProductCategory>, InMemoryRepository<ProductCategory>>();
+            container.RegisterType<IRepository<Product>, SQLRepository<Product>>();
+            container.RegisterType<IRepository<ProductCategory>, SQLRepository<ProductCategory>>();
         }
     }
 }

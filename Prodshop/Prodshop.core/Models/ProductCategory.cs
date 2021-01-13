@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Prodshop.core.Models
 {
@@ -13,15 +15,5 @@ namespace Prodshop.core.Models
 
        
     }
-    //public class CatDBContext : DbContext
-    //{
-    //    public CatDBContext()
-    //    { }
-    //    public DbSet<Category> Categories { get; set; }
-
-    //}
-
-    //public class DbContext
-    //{
-    //}
+   
 }

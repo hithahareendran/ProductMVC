@@ -13,7 +13,6 @@ namespace Prodshop.WebUI.Controllers
     public class ProductCategoryManagerController : Controller
     {
         IRepository<ProductCategory> context;
-       // private DefaultConnection Db = new DefaultConnection();
         public ProductCategoryManagerController(IRepository<ProductCategory> context)
         {
             this.context = context;
@@ -39,6 +38,7 @@ namespace Prodshop.WebUI.Controllers
             }
             else
             {
+               
                 context.Insert(productCategory);
                 context.Commit();
                 return RedirectToAction("Index");
