@@ -64,5 +64,62 @@ namespace Prodshop.WebUI.Controllers
 
             return View();
         }
+        
+        public ActionResult RemoveFromCart(String productId)
+        {
+            List<CartItem> cart = (List<CartItem>)Session["cart"];
+            CartItem existingItem = cart.Find(item => item.Product.Id == productId);
+            if (existingItem != null)
+            {
+                if(existingItem.Quantity==1)
+                {
+                    cart.Remove(existingItem);
+                }
+                else
+                {
+                    existingItem.Quantity -= 1; 
+                }
+                Session["cart"] = cart;
+            }
+           
+            return Redirect("Index");
+        }
+        public ActionResult AddToCart(String productId)
+        {
+            // if there is no cart add as a new cart item
+            if (Session["cart"] == null)
+            {
+                List<CartItem> cart = new List<CartItem>();
+                Product product = context.Find(productId);
+                cart.Add(new CartItem()
+                {
+                    Product = product,
+                    Quantity = 1
+                });
+                Session["cart"] = cart;
+            }
+            else
+            {
+                //check if item already exists in the cart then just increase quantity
+                List<CartItem> cart = (List<CartItem>)Session["cart"];
+                CartItem existingItem = cart.Find(item => item.Product.Id == productId);
+                if(existingItem == null)
+                {
+                    var product = context.Find(productId);
+                    cart.Add(new CartItem()
+                    {
+                        Product = product,
+                        Quantity = 1
+                    });
+                }
+                else
+                {
+                    existingItem.Quantity += 1;
+                }
+                
+                Session["cart"] = cart;
+            }
+            return Redirect("Index");
+        }
     }
 }

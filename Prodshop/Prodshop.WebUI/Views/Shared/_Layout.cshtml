@@ -1,9 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using Prodshop.core.Models;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -24,6 +28,67 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Product Admin", "Index", "ProductManager")</li>
                     <li>@Html.ActionLink("Category Admin", "Index", "ProductCategoryManager")</li>
+                </ul>
+                @{
+                    var total = 0;
+                    decimal totalPrice = 0;
+                    if (Session["cart"] != null)
+                    {
+                        foreach (CartItem item in (List<CartItem>)Session["cart"])
+                        {
+                            total += @item.Quantity;
+                            totalPrice += (@item.Product.Price * @item.Quantity);
+                        }
+                    }
+                 }
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle fa fa-shopping-cart" href="#">(@total) <span class="caret"></span> </a>
+                        
+                        <ul class="dropdown-menu" style="min-width: max-content">
+
+                                    <div class="col-md-12">
+
+                                    @if (Session["cart"] != null)
+                                    {
+                                        foreach (CartItem item in (List<CartItem>)Session["cart"])
+                                        {
+                                            <li class="divider"></li>
+                                            <li>
+                                                <div class="row">
+                                                    <div class="col-md-2"><img  src="~/Content/ProductImages/@item.Product.Image" class="img-thumbnail" width="40px" height="40px"></div>
+                                                    <div class="col-md-4"><a href="#">@item.Product.Name (@item.Quantity)</a></div>
+                                                    <div class="col-md-2"><a href="#">@(item.Product.Price * item.Quantity) </a></div>
+                                                    <div class="col-md-2">
+                                                        @using (Html.BeginForm("AddToCart", "Home", new { productId = item.Product.Id }, FormMethod.Post))
+                                                        {
+                                                            <button type="submit" class="pull-right"><i class="fas fa-plus"></i></button>
+                                                        }
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        @using (Html.BeginForm("RemoveFromCart", "Home", new { productId = item.Product.Id }, FormMethod.Post))
+                                                        {
+                                                            <button type="submit" class="pull-right"><i class="fas fa-minus"></i></button>
+                                                        }
+                                                        
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                        <li class="divider"></li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-6">Total </div>
+                                                <div class="col-md-6"><a href="#">@totalPrice </a></div>
+                                            </div>
+                                        </li>
+
+                                    }
+
+                                </div>
+</ul>
+                        
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

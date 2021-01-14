@@ -31,7 +31,10 @@
             <p>@item.Price</p>
         </div>
         <div class="col-md-12">
-            <a href="#" class="btn btn-default">Add to Basket</a>
+            @using (Html.BeginForm("AddToCart", "Home", new { productId = item.Id }, FormMethod.Post))
+            {
+            <button type="submit" class="pull-right"><i class="fa fa-shopping-cart"></i></button>
+            }
         </div>
     </div>
 }

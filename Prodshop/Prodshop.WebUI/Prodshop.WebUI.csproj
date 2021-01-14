@@ -190,6 +190,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductCartController.cs" />
     <Compile Include="Controllers\ProductCategoryManagerController.cs" />
     <Compile Include="Controllers\ProductManagerController.cs" />
     <Compile Include="Global.asax.cs">
@@ -271,6 +272,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\ProductImages\" />
+    <Folder Include="Views\ProductCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
